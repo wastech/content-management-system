@@ -1,2 +1,23 @@
 # content-management-system
 Building the next Open Source Content Management System with Nodejs, NestJs, ExpressJs, Mongodb, Typescript ,Redis and Elasticsearch
+```
+- Content creation: The ability to create and edit various types of content such as pages, blog posts, images, videos, etc.
+
+- Content organization: The ability to organize and categorize content using tags, categories, and other metadata to make it easy to search and filter.
+
+- Content publishing: The ability to publish content to a website or other digital platform, as well as the ability to schedule content for future publication.
+
+- User management: The ability to create and manage user accounts with different roles and permissions, allowing different users to have access to different parts of the content management system.
+
+- Version control: The ability to track changes to content over time and restore previous versions if necessary.
+
+- Workflow management: The ability to manage the content creation process, including assigning tasks, tracking progress, and approving content for publication.
+
+- SEO optimization: The ability to optimize content for search engines by adding metadata, keywords, and other SEO elements.
+
+- Analytics and reporting: The ability to track website traffic, user behavior, and other metrics to inform content creation and optimization.
+
+- Security: The ability to secure the content management system and its content against unauthorized access and other security threats.
+
+- Integration with other systems: The ability to integrate with other systems such as marketing automation, CRM, or e-commerce platforms to streamline workflows and increase efficiency
+```
