@@ -3,7 +3,7 @@
 A content management system (CMS) is a software application that allows users to create, manage, and publish digital content on the internet. A CMS simplifies the process of creating and editing digital content, making it easier for non-technical users to manage websites and other online platforms
 
 ### Features
-```
+```javascript
 - Content creation: The ability to create and edit various types of content such as pages, blog posts, images, videos, etc.
 
 - Content organization: The ability to organize and categorize content using tags, categories, and other metadata to make it easy to search and filter.
