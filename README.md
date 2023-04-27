@@ -1,6 +1,6 @@
 ## content-management-system
 
-A content management system (CMS) is a software application that allows users to create, manage, and publish digital content on the internet. A CMS simplifies the process of creating and editing digital content, making it easier for non-technical users to manage websites and other online platforms
+```bash A content management system (CMS) is a software application that allows users to create, manage, and publish digital content on the internet. A CMS simplifies the process of creating and editing digital content, making it easier for non-technical users to manage websites and other online platforms```
 
 ![3088358_orig](https://user-images.githubusercontent.com/56930241/234988498-d0487b9d-39df-4520-9f73-65ca3d7b3af6.jpg)
 
