@@ -1,34 +1,81 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  HttpStatus,
+  HttpException,
+  Put,
+  Request,
+  Delete,
+  HttpCode
+} from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { CreateAuthDto } from './dto/create-auth.dto';
 import { UpdateAuthDto } from './dto/update-auth.dto';
+
+import { LoginUserDto } from './dto/login-user.dto';
+import { Public } from './decorators/public.decorator';
+import { RolesGuard } from './roles.guard';
+import { Roles } from './decorators/roles.decorator';
+import { Role } from './entities/auth.entity';
+import { Auth } from './entities/auth.entity';
+import { Request as ExpressRequest } from 'express';
 
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-  @Post()
-  create(@Body() createAuthDto: CreateAuthDto) {
-    return this.authService.create(createAuthDto);
+  @Public()
+  @Post('register')
+  async register(@Body() createAuthDto: CreateAuthDto) {
+    const user = await this.authService.register(createAuthDto);
+    return { user };
   }
 
-  @Get()
-  findAll() {
-    return this.authService.findAll();
+  @Public()
+  @Post('login')
+  @HttpCode(HttpStatus.OK)
+  async login(@Body() loginUserDto: LoginUserDto) {
+    const token = await this.authService.login(loginUserDto);
+    if (!token) {
+      throw new HttpException(
+        'Invalid login credentials',
+        HttpStatus.UNAUTHORIZED,
+      );
+    }
+    return { token };
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.authService.findOne(+id);
+  @Get('profile')
+  getProfile(@Request() req) {
+    return req.user;
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateAuthDto: UpdateAuthDto) {
-    return this.authService.update(+id, updateAuthDto);
+  @Put(':id')
+  async updateUser(@Param('id') id: string, @Body() UpdateAuthDto: any) {
+    const userId = id;
+
+    return this.authService.updateUser(userId, UpdateAuthDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.authService.remove(+id);
+  @Patch('update-password')
+  async changePassword(
+    @Body('oldPassword') oldPassword: string,
+    @Body('newPassword') newPassword: string,
+    @Request() req,
+  ) {
+    console.log(req.body);
+    const userId = req.user.id;
+    // Call the changePassword method on the AuthService
+    const result = await this.authService.updateUserPassword(
+      userId,
+      oldPassword,
+      newPassword,
+    );
+
+    return result;
   }
 }
