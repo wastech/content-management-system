@@ -22,7 +22,6 @@ export class AuthService {
     @InjectModel(Auth.name) private readonly authModel: Model<AuthDocument>,
     private jwtService: JwtService,
   ) {}
-  
 
   async register(createUserDto: CreateAuthDto): Promise<Auth> {
     const saltRounds = 10;
@@ -68,6 +67,7 @@ export class AuthService {
   async updateUser(
     userId: string,
     updateUserDto: UpdateAuthDto,
+    user: Auth
   ): Promise<Auth> {
     const allowedUpdates = ['name', 'email']; // fields that can be updated
     const updates = Object.keys(updateUserDto); // fields sent in the request body
@@ -79,19 +79,28 @@ export class AuthService {
       throw new BadRequestException('Invalid updates!');
     }
 
-    const user = await this.authModel.findById(userId);
+    const existingUser = await this.authModel.findById(userId);
 
-    if (!user) {
+    if (!existingUser) {
       throw new NotFoundException('User not found!');
+    }
+    // Check if user is authorized to delete
+    if (
+      user.role&&
+      existingUser._id.toString() !== user.toString()
+    ) {
+      throw new UnauthorizedException(
+        'You are not authorized to delete this user',
+      );
     }
 
     updates.forEach((update) => {
-      user[update] = updateUserDto[update];
+      existingUser[update] = updateUserDto[update];
     });
 
-    await user.save();
+    await existingUser.save();
 
-    return user;
+    return existingUser;
   }
 
   async updateUserPassword(

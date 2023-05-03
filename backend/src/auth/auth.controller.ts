@@ -8,9 +8,10 @@ import {
   HttpStatus,
   HttpException,
   Put,
+  Req,
   Request,
   Delete,
-  HttpCode
+  HttpCode,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { CreateAuthDto } from './dto/create-auth.dto';
@@ -23,6 +24,7 @@ import { Roles } from './decorators/roles.decorator';
 import { Role } from './entities/auth.entity';
 import { Auth } from './entities/auth.entity';
 import { Request as ExpressRequest } from 'express';
+import { UseGuards } from '@nestjs/common';
 
 @Controller('auth')
 export class AuthController {
@@ -55,10 +57,16 @@ export class AuthController {
   }
 
   @Put(':id')
-  async updateUser(@Param('id') id: string, @Body() UpdateAuthDto: any) {
+  // @UseGuards(RolesGuard)
+  // @Roles(Role.Admin, Role.Guest)
+  async updateUser(
+    @Param('id') id: string,
+    @Body() UpdateAuthDto: any,
+    @Req() req,
+  ) {
     const userId = id;
 
-    return this.authService.updateUser(userId, UpdateAuthDto);
+    return this.authService.updateUser(userId, UpdateAuthDto, req.user.role);
   }
 
   @Patch('update-password')
