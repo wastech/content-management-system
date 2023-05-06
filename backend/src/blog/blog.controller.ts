@@ -84,4 +84,17 @@ export class BlogController {
     }
     return post;
   }
+
+  @Public()
+  @Get(':id/similar')
+  async findSimilarBlogs(@Param('id') id: string): Promise<Blog[]> {
+    const blog = await this.blogService.getPostById(id);
+    if (!blog) {
+      throw new NotFoundException('Blog not found');
+    }
+
+    const similarBlogs = await this.blogService.findSimilarBlogs(blog);
+
+    return similarBlogs;
+  }
 }

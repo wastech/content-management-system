@@ -44,4 +44,30 @@ export class BlogService {
       })
       .exec();
   }
+
+  // async getBlogsByCategory(category: string, limit: number): Promise<Blog[]> {
+  //   return this.blogModel
+  //     .find({ category })
+  //     .sort({ createdAt: 'desc' })
+  //     .limit(limit)
+  //     .exec();
+  // }
+
+  async getPostById(postId: string): Promise<Blog> {
+    const post = await this.blogModel.findById(postId).exec();
+    return post;
+  }
+
+  async findSimilarBlogs(blog: Blog): Promise<Blog[]> {
+    const similarBlogs = await this.blogModel
+      .find({
+        category: blog.category,
+        _id: { $ne: blog._id }, // exclude the current blog post from the results
+      })
+      .sort({ createdAt: -1 }) // sort by creation date in descending order
+      .limit(3) // limit to a maximum of 3 similar posts
+      .exec();
+
+    return similarBlogs;
+  }
 }
