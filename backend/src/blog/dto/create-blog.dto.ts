@@ -3,7 +3,8 @@ export class CreateBlogDto {
   readonly title: string;
   readonly author: string;
   readonly slug: string;
+  readonly category: string;
   readonly description: string;
   readonly timestamp: Date;
-  readonly imageUrl: string;
+  imageUrl: string;
 }

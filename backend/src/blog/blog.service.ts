@@ -18,7 +18,7 @@ export class BlogService {
     return createdBlog.save();
   }
 
-  async findAll(page: number = 1, limit: number = 10) {
+  async findAll(page: number = 1, limit: number = 5) {
     const skip = (page - 1) * limit; // calculate how many posts to skip based on page and limit
     const total = await this.blogModel.countDocuments(); // get the total number of posts
     const blogs = await this.blogModel.find().skip(skip).limit(limit).exec(); // get the posts for the current page
@@ -29,5 +29,19 @@ export class BlogService {
       totalPages: Math.ceil(total / limit),
       totalPosts: total,
     };
+  }
+
+  async findByIdCategoryAndSlug(
+    id: string,
+    category: string,
+    slug: string,
+  ): Promise<Blog> {
+    return await this.blogModel
+      .findOne({
+        _id: id,
+        category: category,
+        slug: slug,
+      })
+      .exec();
   }
 }

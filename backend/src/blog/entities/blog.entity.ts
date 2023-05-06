@@ -4,22 +4,10 @@ import slugify from 'slugify';
 import * as mongoose from 'mongoose';
 import { User } from 'src/user/entities/user.entity';
 
-import * as path from 'path';
-import * as multer from 'multer';
-
-export const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, './uploads/');
-  },
-  filename: (req, file, cb) => {
-    const filename = `${Date.now()}${path.extname(file.originalname)}`;
-    cb(null, filename);
-  },
-});
-
 export interface Blog extends Document {
   tag: string[];
   title: string;
+  category: string;
   user: User;
   slug: string;
   description: string;
@@ -35,7 +23,10 @@ export class Blog {
   @Prop({ required: true })
   title: string;
 
-  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }] })
+  @Prop({ required: true })
+  category: string;
+
+  @Prop({ type: { type: mongoose.Schema.Types.ObjectId, ref: 'User' } })
   author: User;
 
   @Prop({ default: '' })
