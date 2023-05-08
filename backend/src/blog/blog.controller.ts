@@ -113,4 +113,15 @@ export class BlogController {
   ): Promise<Blog[]> {
     return this.blogService.findByCategory(categoryName);
   }
+
+  @Public()
+  @Get('tags')
+  async getAllTags() {
+    const tags = await this.blogService.getAllTags();
+    const formattedTags = tags.map((tag) => ({
+      name: tag.name,
+      count: tag.count,
+    }));
+    return { tags: formattedTags };
+  }
 }
