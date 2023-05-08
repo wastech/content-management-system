@@ -81,4 +81,13 @@ export class BlogService {
     ]);
     return tags;
   }
+
+  async getPostsByTag(tag: string): Promise<Blog[]> {
+    const posts = await this.blogModel.find({ tag: tag }).exec();
+    return posts;
+  }
+
+  async deletePost(id: string): Promise<void> {
+    await this.blogModel.findByIdAndDelete(id).exec();
+  }
 }
