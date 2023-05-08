@@ -45,14 +45,6 @@ export class BlogService {
       .exec();
   }
 
-  // async getBlogsByCategory(category: string, limit: number): Promise<Blog[]> {
-  //   return this.blogModel
-  //     .find({ category })
-  //     .sort({ createdAt: 'desc' })
-  //     .limit(limit)
-  //     .exec();
-  // }
-
   async getPostById(postId: string): Promise<Blog> {
     const post = await this.blogModel.findById(postId).exec();
     return post;
@@ -69,5 +61,14 @@ export class BlogService {
       .exec();
 
     return similarBlogs;
+  }
+
+  async getBlogsByAuthor(authorId: string): Promise<Blog[]> {
+    const blogs = await this.blogModel.find({ author: authorId }).exec();
+    return blogs;
+  }
+
+  async findByCategory(categoryName: string): Promise<Blog[]> {
+    return this.blogModel.find({ category: categoryName }).exec();
   }
 }

@@ -61,6 +61,7 @@ export class BlogController {
     }
   }
 
+  @Public()
   @Get()
   async getAll(@Query('page') page: number, @Query('limit') limit: number) {
     return this.blogService.findAll(page, limit);
@@ -96,5 +97,20 @@ export class BlogController {
     const similarBlogs = await this.blogService.findSimilarBlogs(blog);
 
     return similarBlogs;
+  }
+
+  @Public()
+  @Get('/author/:authorId')
+  async getBlogsByAuthor(@Param('authorId') authorId: string): Promise<Blog[]> {
+    const blogs = await this.blogService.getBlogsByAuthor(authorId);
+    return blogs;
+  }
+
+  @Public()
+  @Get('category/:categoryName')
+  async getBlogsByCategory(
+    @Param('categoryName') categoryName: string,
+  ): Promise<Blog[]> {
+    return this.blogService.findByCategory(categoryName);
   }
 }
