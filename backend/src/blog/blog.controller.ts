@@ -135,6 +135,34 @@ export class BlogController {
     return { posts };
   }
 
+  @Patch(':id')
+  async updatePost(
+    @Param('id') id: string,
+    @Body() updatePostDto: UpdateBlogDto,
+    @Req() req: any,
+  ) {
+    const post = await this.blogService.getPostById(id);
+    if (!post) {
+      throw new NotFoundException(`Blog post with ID ${id} not found`);
+    }
+
+    const user = req.user;
+    if (
+      post.author.toString() !== user._id.toString() &&
+      user.role !== 'admin'
+    ) {
+      throw new UnauthorizedException(
+        `You are not authorized to update this post`,
+      );
+    }
+
+    const updatedPost = await this.blogService.updatePost(id, updatePostDto);
+    return {
+      message: `Blog post with ID ${id} updated successfully`,
+      post: updatedPost,
+    };
+  }
+
   @Delete(':id')
   async deletePost(@Param('id') id: string, @Req() req: any) {
     const post = await this.blogService.getPostById(id);

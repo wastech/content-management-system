@@ -5,6 +5,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { UpdateBlogDto } from './dto/update-blog.dto';
 import { Blog } from './entities/blog.entity';
 import { JwtPayload } from 'src/auth/interfaces/jwt-payload.interface';
+import slugify from 'slugify';
 
 @Injectable()
 export class BlogService {
@@ -85,6 +86,15 @@ export class BlogService {
   async getPostsByTag(tag: string): Promise<Blog[]> {
     const posts = await this.blogModel.find({ tag: tag }).exec();
     return posts;
+  }
+
+  async updatePost(id: string, updatePostDto: UpdateBlogDto): Promise<Blog> {
+    const options = { new: true }; // Return the updated document
+
+    // Generate new slug based on updated title
+    updatePostDto.slug = slugify(updatePostDto.title, { lower: true });
+
+    return this.blogModel.findByIdAndUpdate(id, updatePostDto, options).exec();
   }
 
   async deletePost(id: string): Promise<void> {
