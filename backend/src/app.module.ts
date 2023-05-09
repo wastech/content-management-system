@@ -10,6 +10,7 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 
 import { UserModule } from './user/user.module';
 import { BlogModule } from './blog/blog.module';
+import { CategoryModule } from './category/category.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { BlogModule } from './blog/blog.module';
       rootPath: join(__dirname, '..', 'uploads'),
       serveRoot: '/uploads',
     }),
+    CategoryModule,
   ],
   controllers: [AppController],
   providers: [
