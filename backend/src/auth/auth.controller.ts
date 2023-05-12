@@ -30,6 +30,11 @@ import { UseGuards } from '@nestjs/common';
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
+  /**
+   * Defines a new route for user registration.
+   * @param {CreateAuthDto} createAuthDto - The data for creating a new user account.
+   * @returns {Promise<{ user: Auth }>} The newly created user account.
+   */
   @Public()
   @Post('register')
   async register(@Body() createAuthDto: CreateAuthDto) {
@@ -37,6 +42,12 @@ export class AuthController {
     return { user };
   }
 
+  /**
+Logs in a user and returns a JWT token if the login credentials are valid.
+@param {LoginUserDto} loginUserDto - The DTO containing the user's login credentials.
+@returns {Object} An object containing the JWT token.
+@throws {HttpException} If the login credentials are invalid.
+*/
   @Public()
   @Post('login')
   @HttpCode(HttpStatus.OK)
@@ -51,6 +62,11 @@ export class AuthController {
     return { token };
   }
 
+  /**
+   * Returns the authenticated user's profile.
+   * @param {Request} req - The request object containing the authenticated user's information.
+   * @returns {Object} An object representing the authenticated user's profile.
+   */
   @Get('profile')
   getProfile(@Request() req) {
     return req.user;
@@ -69,6 +85,13 @@ export class AuthController {
     return this.authService.updateUser(userId, UpdateAuthDto, req.user.role);
   }
 
+  /**
+   * Updates user password if old password is correct.
+   * @param {string} oldPassword - The user's current password.
+   * @param {string} newPassword - The user's desired new password.
+   * @param {Request} req - The request object.
+   * @returns {Promise<any>} A promise that resolves to the result of the update operation.
+   */
   @Patch('update-password')
   async changePassword(
     @Body('oldPassword') oldPassword: string,
