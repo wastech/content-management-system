@@ -53,16 +53,23 @@ export class CategoryController {
     return this.categoryService.findOne(id);
   }
 
+  @Public()
   @Patch(':id')
-  update(
+  async updateCategory(
     @Param('id') id: string,
-    @Body() updateCategoryDto: UpdateCategoryDto,
+    @Body() update: Partial<Category>,
   ) {
-    return this.categoryService.update(+id, updateCategoryDto);
+    const category = await this.categoryService.updateCategory(id, update);
+    return category;
   }
 
+  @Public()
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.categoryService.remove(+id);
+  async deleteCategory(@Param('id') id: string) {
+    const category = await this.categoryService.deleteCategory(id);
+    if (!category) {
+      throw new NotFoundException(`Category with ID ${id} not found`);
+    }
+    return { message: `Category with ID ${id} successfully deleted` };
   }
 }
