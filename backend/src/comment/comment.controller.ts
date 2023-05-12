@@ -4,17 +4,13 @@ import {
   Post,
   Body,
   Request,
-  Patch,
   Param,
   Delete,
   UseGuards,
-  ForbiddenException,
   NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
 import { CommentService } from './comment.service';
-import { CreateCommentDto } from './dto/create-comment.dto';
-import { UpdateCommentDto } from './dto/update-comment.dto';
 import { Comment } from './entities/comment.entity';
 import { RolesGuard } from 'src/auth/roles.guard';
 import { Role } from 'src/auth/entities/auth.entity';
