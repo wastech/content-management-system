@@ -21,12 +21,24 @@ import { RolesGuard } from 'src/auth/roles.guard';
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
+  /**
+   * Retrieves all users in the system. Requires admin role.
+   * @returns {Promise<Auth[]>} A list of all users in the system.
+   * @throws {UnauthorizedException} If the user does not have admin role.
+   */
   @Get()
   @Roles(Role.Admin)
   async findAll(): Promise<Auth[]> {
     return this.userService.findAll();
   }
 
+  /**
+   * Deletes a user by ID.
+   * @param {Request} req - The request object.
+   * @param {string} userId - The ID of the user to delete.
+   * @returns {Object} An object with a success message.
+   * @throws {UnauthorizedException} If the user is not authorized to delete users.
+   */
   @Delete(':userId')
   @UseGuards(RolesGuard)
   @Roles(Role.Admin)
@@ -40,6 +52,10 @@ export class UserController {
     };
   }
 
+  // Retrieves a user by their ID
+  // @param {string} id - The ID of the user to retrieve
+  // @returns {Promise<Auth>} The user with the specified ID
+  // @throws {NotFoundException} If the user with the specified ID is not found
   @Get(':id') // Defines a new route with a dynamic parameter "id"
   @UseGuards(RolesGuard)
   @Roles(Role.Admin, Role.Guest) // Allows both admin and regular users to access this route
