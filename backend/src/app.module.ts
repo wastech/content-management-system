@@ -20,12 +20,12 @@ import { CommentModule } from './comment/comment.module';
     UserModule,
     BlogModule,
     CategoryModule,
+    CommentModule,
     // Serve files from the "uploads" directory at the "/uploads" URL
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'uploads'),
       serveRoot: '/uploads',
     }),
-    CommentModule,
   ],
   controllers: [AppController],
   providers: [

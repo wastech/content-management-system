@@ -20,10 +20,14 @@ import { RolesGuard } from 'src/auth/roles.guard';
 import { Role } from 'src/auth/entities/auth.entity';
 import { Public } from 'src/auth/decorators/public.decorator';
 import { Roles } from 'src/auth/decorators/roles.decorator';
+import { BlogService } from 'src/blog/blog.service';
 
 @Controller('comment')
 export class CommentController {
-  constructor(private readonly commentService: CommentService) {}
+  constructor(
+    private readonly commentService: CommentService,
+    private blogService: BlogService,
+  ) {}
 
   @Post(':postId')
   @UseGuards(RolesGuard)
@@ -34,6 +38,12 @@ export class CommentController {
     @Body('content') content: string,
   ): Promise<Comment> {
     const author = req.user._id;
+    // Check if the post exists
+    const post = await this.blogService.getPostById(postId);
+    if (!post) {
+      throw new NotFoundException('Post not found');
+    }
+
     return this.commentService.createComment(postId, author, content);
   }
 

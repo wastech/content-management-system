@@ -46,4 +46,8 @@ export class CommentService {
   async deleteComment(commentId: string): Promise<void> {
     const comment = await this.commentModel.findByIdAndDelete(commentId);
   }
+
+  async deleteManyByPostId(postId: string) {
+    return this.commentModel.deleteMany({ post: postId });
+  }
 }

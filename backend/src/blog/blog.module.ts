@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module, forwardRef } from '@nestjs/common';
 import { BlogService } from './blog.service';
 import { BlogController } from './blog.controller';
 import { BlogSchema } from './entities/blog.entity';
@@ -6,6 +6,7 @@ import { MulterModule } from '@nestjs/platform-express';
 import { MongooseModule } from '@nestjs/mongoose';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
+import { CommentModule } from 'src/comment/comment.module';
 import {
   Category,
   CategorySchema,
@@ -17,6 +18,7 @@ import {
       { name: 'Blog', schema: BlogSchema },
       { name: Category.name, schema: CategorySchema },
     ]),
+    forwardRef(() => CommentModule),
     MulterModule.register({
       storage: diskStorage({
         destination: './uploads/blog',
@@ -34,5 +36,6 @@ import {
   ],
   controllers: [BlogController],
   providers: [BlogService],
+  exports: [BlogService],
 })
 export class BlogModule {}

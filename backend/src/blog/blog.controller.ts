@@ -25,11 +25,15 @@ import { RolesGuard } from 'src/auth/roles.guard';
 import { Role } from 'src/auth/entities/auth.entity';
 import { Public } from 'src/auth/decorators/public.decorator';
 import { Roles } from 'src/auth/decorators/roles.decorator';
+import { CommentService } from 'src/comment/comment.service';
 import { FileInterceptor, AnyFilesInterceptor } from '@nestjs/platform-express';
 
 @Controller('blogs')
 export class BlogController {
-  constructor(private readonly blogService: BlogService) {}
+  constructor(
+    private readonly blogService: BlogService,
+    private readonly commentService: CommentService,
+  ) {}
 
   @Post()
   @UseGuards(RolesGuard)
@@ -186,7 +190,7 @@ export class BlogController {
         `You are not authorized to delete this post`,
       );
     }
-
+    await this.commentService.deleteManyByPostId(id);
     await this.blogService.deletePost(id);
     return { message: `Blog post with ID ${id} deleted successfully` };
   }
