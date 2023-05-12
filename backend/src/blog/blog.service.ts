@@ -6,10 +6,18 @@ import { UpdateBlogDto } from './dto/update-blog.dto';
 import { Blog } from './entities/blog.entity';
 import { JwtPayload } from 'src/auth/interfaces/jwt-payload.interface';
 import slugify from 'slugify';
+import {
+  Category,
+  CategoryDocument,
+} from 'src/category/entities/category.entity';
 
 @Injectable()
 export class BlogService {
-  constructor(@InjectModel('Blog') private readonly blogModel: Model<Blog>) {}
+  constructor(
+    @InjectModel('Blog') private readonly blogModel: Model<Blog>,
+    @InjectModel(Category.name)
+    private readonly categoryModel: Model<CategoryDocument>,
+  ) {}
 
   async create(createBlogDto: CreateBlogDto, user: JwtPayload): Promise<Blog> {
     const createdBlog = new this.blogModel({
@@ -19,7 +27,7 @@ export class BlogService {
     return createdBlog.save();
   }
 
-  async findAll(page: number = 1, limit: number = 5) {
+  async findAll(page: number = 1, limit: number = 10) {
     const skip = (page - 1) * limit; // calculate how many posts to skip based on page and limit
     const total = await this.blogModel.countDocuments(); // get the total number of posts
     const blogs = await this.blogModel.find().skip(skip).limit(limit).exec(); // get the posts for the current page
@@ -43,6 +51,7 @@ export class BlogService {
         category: category,
         slug: slug,
       })
+      .populate('category', 'name')
       .exec();
   }
 

@@ -6,10 +6,17 @@ import { MulterModule } from '@nestjs/platform-express';
 import { MongooseModule } from '@nestjs/mongoose';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
+import {
+  Category,
+  CategorySchema,
+} from 'src/category/entities/category.entity';
 
 @Module({
   imports: [
-    MongooseModule.forFeature([{ name: 'Blog', schema: BlogSchema }]),
+    MongooseModule.forFeature([
+      { name: 'Blog', schema: BlogSchema },
+      { name: Category.name, schema: CategorySchema },
+    ]),
     MulterModule.register({
       storage: diskStorage({
         destination: './uploads/blog',

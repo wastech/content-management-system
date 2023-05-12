@@ -1,3 +1,4 @@
+import { Category } from './../../category/entities/category.entity';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 import slugify from 'slugify';
@@ -7,7 +8,7 @@ import { User } from 'src/user/entities/user.entity';
 export interface Blog extends Document {
   tag: string[];
   title: string;
-  category: string;
+  category: Category;
   user: User;
   slug: string;
   description: string;
@@ -23,8 +24,8 @@ export class Blog {
   @Prop({ required: true })
   title: string;
 
-  @Prop({ required: true })
-  category: string;
+  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Category' }] })
+  category: Category;
 
   @Prop({ type: { type: mongoose.Schema.Types.ObjectId, ref: 'User' } })
   author: User;
