@@ -163,6 +163,13 @@ export class BlogController {
     };
   }
 
+  @Public()
+  @Get('query')
+  async search(@Query('q') query: string) {
+    const results = await this.blogService.search(query);
+    return results;
+  }
+
   @Delete(':id')
   async deletePost(@Param('id') id: string, @Req() req: any) {
     const post = await this.blogService.getPostById(id);

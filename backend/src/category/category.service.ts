@@ -1,19 +1,31 @@
 import { Injectable } from '@nestjs/common';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
+import { Model } from 'mongoose';
+import { InjectModel } from '@nestjs/mongoose';
+import { JwtPayload } from 'src/auth/interfaces/jwt-payload.interface';
+import { CategoryDocument, Category } from './entities/category.entity';
 
 @Injectable()
 export class CategoryService {
-  create(createCategoryDto: CreateCategoryDto) {
-    return 'This action adds a new category';
+  constructor(
+    @InjectModel('Category')
+    private readonly categoryModel: Model<CategoryDocument>,
+  ) {}
+
+  async createCategory(createCategoryDto: CreateCategoryDto, authorId: string) {
+    const createdCategory = new this.categoryModel({
+      ...createCategoryDto,
+      author: authorId,
+    });
+    return createdCategory.save();
   }
 
-  findAll() {
-    return `This action returns all category`;
+  async findAll(): Promise<Category[]> {
+    return this.categoryModel.find();
   }
-
-  findOne(id: number) {
-    return `This action returns a #${id} category`;
+  async findOne(id: string): Promise<Category> {
+    return this.categoryModel.findById(id);
   }
 
   update(id: number, updateCategoryDto: UpdateCategoryDto) {

@@ -18,12 +18,12 @@ import { CategoryModule } from './category/category.module';
     AuthModule,
     UserModule,
     BlogModule,
+    CategoryModule,
     // Serve files from the "uploads" directory at the "/uploads" URL
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'uploads'),
       serveRoot: '/uploads',
     }),
-    CategoryModule,
   ],
   controllers: [AppController],
   providers: [
