@@ -29,6 +29,14 @@ export class CommentController {
     private blogService: BlogService,
   ) {}
 
+  /**
+   * Creates a new comment on a blog post.
+   * @param {string} postId - The ID of the blog post.
+   * @param {Express.Request} req - The request object.
+   * @param {string} content - The content of the comment.
+   * @returns {Promise<Comment>} The newly created comment.
+   * @throws {NotFoundException} If the blog post is not found.
+   */
   @Post(':postId')
   @UseGuards(RolesGuard)
   @Roles(Role.Admin, Role.Guest)
@@ -47,11 +55,25 @@ export class CommentController {
     return this.commentService.createComment(postId, author, content);
   }
 
+  /**
+   * Retrieves all comments for a specific blog post.
+   * @param {string} postId - The ID of the blog post.
+   * @returns {Promise<Comment[]>} The list of comments for the post.
+   */
   @Public()
   @Get(':postId')
   async getPostComments(@Param('postId') postId: string): Promise<Comment[]> {
     return this.commentService.getPostComments(postId);
   }
+
+  /**
+   * Deletes a comment by ID
+   * @param {string} id - The ID of the comment
+   * @param {Request} req - The request object
+   * @returns {Promise<Object>} An object with a success message
+   * @throws {NotFoundException} If the comment is not found
+   * @throws {UnauthorizedException} If the user is not authorized to delete the comment
+   */
 
   @Delete(':id')
   @UseGuards(RolesGuard)
