@@ -1,6 +1,6 @@
 ## CMS API
 
-bash A content management system (CMS) is a software application that allows users to create, manage, and publish digital content on the internet. A CMS simplifies the process of creating and editing digital content, making it easier for non-technical users to manage websites and other online platforms
+A content management system (CMS) is a software application that allows users to create, manage, and publish digital content on the internet. A CMS simplifies the process of creating and editing digital content, making it easier for non-technical users to manage websites and other online platforms
 
 ![3088358_orig](https://user-images.githubusercontent.com/56930241/234988498-d0487b9d-39df-4520-9f73-65ca3d7b3af6.jpg)
 
@@ -14,7 +14,7 @@ git@github.com:wastech/content-management-system.git
  - Navigate to the project directory:
 
 ```bash
-   cd backend
+ cd backend
 ```
  - Run npm install to install the dependencies.
 
@@ -74,3 +74,18 @@ The API will be available at http://localhost:3000. You can test the API endpoin
  - [MongoDB](https://www.mongodb.com/)
  
  Before you can run the API locally, make sure you have Node.js and MongoDB installed on your machine. You can download Node.js from the official website, and MongoDB from the MongoDB website.
+ 
+ ### Contributing
+ I welcome contributions from the community! Here are a few guidelines to keep in mind:
+ - Before starting work on a new feature, please create an issue first to discuss the proposed changes with the maintainers.
+ - Make sure your code follows our code style guidelines, which can be found in the .eslintrc file.
+ - All pull requests should be submitted against the develop branch.
+ - Write clear and concise commit messages that describe the changes you're making.
+ - Make sure all existing tests still pass and add new tests if necessary.
+ - When submitting a pull request, please provide a summary of the changes made and a link to the corresponding issue.
+ - Be respectful of others and their contributions. We have a code of conduct in place to ensure a welcoming environment for everyone.
+ 
+ If you have any questions or need help getting started, please don't hesitate to reach out to me. I'm happy to help!
+ 
+### Contact
+If you have any questions or suggestions regarding this API, please feel free to contact me at [fataiwasiu2@gmail.com]. Thank you for using our service!
