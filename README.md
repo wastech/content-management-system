@@ -39,3 +39,11 @@ JWT_SECRET=<JWT secret key>
 
 - Integration with other systems: The ability to integrate with other systems such as marketing automation, CRM, or e-commerce platforms to streamline workflows and increase efficiency
 
+### Stack
+- [Node.js](https://nodejs.org/en)
+- [Nest.j](https://nestjs.com/)
+- [Express.js](https://expressjs.com/)
+- [MongoDB](https://www.mongodb.com/)
+- [Mongoose](https://mongoosejs.com/)
+- [JWT](https://jwt.io/)
+ CMS API is built using Node.js, Express.js and Nest.js, with MongoDB as the database. I'm using the Mongoose library to interact with the database, and JWT for authentication.
