@@ -7,7 +7,20 @@ bash A content management system (CMS) is a software application that allows use
 ## Getting Started
  To get started with this API, you'll need to have Node.js installed on your machine. Once you've done that, you can follow these steps to set up the API:
  - Clone the repository to your local machine.
+
+```bash
+git@github.com:wastech/content-management-system.git
+```
+ - Navigate to the project directory:
+
+```bash
+   cd backend
+```
  - Run npm install to install the dependencies.
+
+```bash
+npm install
+```
  - Create a .env file in the root directory and add the following variables
 
 ```bash 
