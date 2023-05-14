@@ -48,3 +48,9 @@ JWT_SECRET=<JWT secret key>
 - [JWT](https://jwt.io/)
 
  CMS API is built using Node.js, Express.js and Nest.js, with MongoDB as the database. I'm using the Mongoose library to interact with the database, and JWT for authentication.
+ 
+ ### Requirements
+ - [Node.js](https://nodejs.org/en)
+ - [MongoDB](https://www.mongodb.com/)
+ 
+ Before you can run the API locally, make sure you have Node.js and MongoDB installed on your machine. You can download Node.js from the official website, and MongoDB from the MongoDB website.
