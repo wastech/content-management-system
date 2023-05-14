@@ -1,11 +1,24 @@
-## content-management-system
+## CMS API
 
 bash A content management system (CMS) is a software application that allows users to create, manage, and publish digital content on the internet. A CMS simplifies the process of creating and editing digital content, making it easier for non-technical users to manage websites and other online platforms
 
 ![3088358_orig](https://user-images.githubusercontent.com/56930241/234988498-d0487b9d-39df-4520-9f73-65ca3d7b3af6.jpg)
 
-### Features
-```javascript
+## Getting Started
+ To get started with this API, you'll need to have Node.js installed on your machine. Once you've done that, you can follow these steps to set up the API:
+ - Clone the repository to your local machine.
+ - Run npm install to install the dependencies.
+ - Create a .env file in the root directory and add the following variables
+
+```bash 
+PORT=<port number>
+MONGO_URI=<MongoDB URI>
+JWT_SECRET=<JWT secret key>
+```
+- Run npm start to start the server.
+
+## Features
+
 - Content creation: The ability to create and edit various types of content such as pages, blog posts, images, videos, etc.
 
 - Content organization: The ability to organize and categorize content using tags, categories, and other metadata to make it easy to search and filter.
@@ -25,4 +38,4 @@ bash A content management system (CMS) is a software application that allows use
 - Security: The ability to secure the content management system and its content against unauthorized access and other security threats.
 
 - Integration with other systems: The ability to integrate with other systems such as marketing automation, CRM, or e-commerce platforms to streamline workflows and increase efficiency
-```
+
