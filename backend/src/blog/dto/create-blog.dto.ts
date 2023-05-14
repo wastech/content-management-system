@@ -7,4 +7,6 @@ export class CreateBlogDto {
   readonly description: string;
   readonly timestamp: Date;
   imageUrl: string;
+  isPublished: boolean;
+  isFeatured: boolean;
 }

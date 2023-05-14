@@ -14,6 +14,8 @@ export interface Blog extends Document {
   description: string;
   timestamp: Date;
   imageUrl: string;
+  isFeatured: boolean;
+  isPublished: boolean;
 }
 
 @Schema()
@@ -38,6 +40,12 @@ export class Blog {
 
   @Prop({ required: true })
   description: string;
+
+  @Prop({ default: false })
+  isPublished: boolean;
+
+  @Prop({ default: false })
+  isFeatured: boolean;
 
   @Prop({ default: Date.now })
   timestamp: Date;

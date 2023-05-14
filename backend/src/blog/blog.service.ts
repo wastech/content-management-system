@@ -40,6 +40,31 @@ export class BlogService {
     };
   }
 
+  async getPublishedPosts(page: number = 1, limit: number = 10) {
+    const skip = (page - 1) * limit; // calculate how many posts to skip based on page and limit
+    const total = await this.blogModel.countDocuments(); // get the total number of posts
+    const blogs = await this.blogModel
+      .find({ isPublished: true })
+      .skip(skip)
+      .limit(limit)
+      .exec(); // get the posts for the current page
+
+    return {
+      data: blogs,
+      currentPage: page,
+      totalPages: Math.ceil(total / limit),
+      totalPosts: total,
+    };
+  }
+
+  async findFeaturedPosts(): Promise<Blog[]> {
+    return this.blogModel
+      .find({ isFeatured: true })
+      .sort({ createdAt: -1 })
+      .limit(4)
+      .exec();
+  }
+
   async findByIdCategoryAndSlug(
     id: string,
     category: string,
@@ -97,11 +122,17 @@ export class BlogService {
     return posts;
   }
 
-  async updatePost(id: string, updatePostDto: UpdateBlogDto): Promise<Blog> {
+  async updatePost(
+    id: string,
+    updatePostDto: Partial<UpdateBlogDto>,
+  ): Promise<Blog> {
     const options = { new: true }; // Return the updated document
 
-    // Generate new slug based on updated title
-    updatePostDto.slug = slugify(updatePostDto.title, { lower: true });
+    // Check if the title has been updated
+    if (updatePostDto.title) {
+      // If the title has been updated, generate a new slug based on the updated title
+      updatePostDto.slug = slugify(updatePostDto.title, { lower: true });
+    }
 
     return this.blogModel.findByIdAndUpdate(id, updatePostDto, options).exec();
   }

@@ -26,6 +26,7 @@ import { Role } from 'src/auth/entities/auth.entity';
 import { Public } from 'src/auth/decorators/public.decorator';
 import { Roles } from 'src/auth/decorators/roles.decorator';
 import { CommentService } from 'src/comment/comment.service';
+import { MongoError } from 'mongodb';
 import { FileInterceptor, AnyFilesInterceptor } from '@nestjs/platform-express';
 
 @Controller('blogs')
@@ -55,9 +56,7 @@ export class BlogController {
     @Body() createBlogDto: CreateBlogDto,
     @Request() req,
   ): Promise<Blog> {
-    console.log('req:'); // log the file parameter
     try {
-      console.log('file:', file); // log the file parameter
       createBlogDto.imageUrl = file.path;
 
       const savedBlogPost = await this.blogService.create(
@@ -70,11 +69,11 @@ export class BlogController {
 
       return savedBlogPost;
     } catch (error) {
-      console.error(error.message);
-      throw new HttpException(
-        'Error creating blog post',
-        HttpStatus.INTERNAL_SERVER_ERROR,
-      );
+      if (error instanceof MongoError && error.code === 11000) {
+        throw new Error('Slug already exists');
+      } else {
+        throw error;
+      }
     }
   }
 
@@ -91,6 +90,20 @@ export class BlogController {
     return this.blogService.findAll(page, limit);
   }
 
+  @Public()
+  @Get('published')
+  async getPublishedPosts(
+    @Query('page') page: number,
+    @Query('limit') limit: number,
+  ) {
+    return this.blogService.getPublishedPosts(page, limit);
+  }
+
+  @Public()
+  @Get('featured')
+  async getFeaturedPosts(): Promise<Blog[]> {
+    return this.blogService.findFeaturedPosts();
+  }
   /**
    * Retrieves a blog post by ID, category, and slug.
    * @param {string} id - The ID of the blog post.
