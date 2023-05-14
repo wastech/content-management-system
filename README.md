@@ -30,6 +30,13 @@ JWT_SECRET=<JWT secret key>
 ```
 - Run npm start to start the server.
 
+```bash
+npm start
+
+```
+
+The API will be available at http://localhost:3000. You can test the API endpoints using a tool like Postman or curl.
+
 ## Features
 
 - Content creation: The ability to create and edit various types of content such as pages, blog posts, images, videos, etc.
