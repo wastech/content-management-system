@@ -1,4 +1,4 @@
-## CMS API
+# CMS API
 
 A content management system (CMS) is a software application that allows users to create, manage, and publish digital content on the internet. A CMS simplifies the process of creating and editing digital content, making it easier for non-technical users to manage websites and other online platforms
 
