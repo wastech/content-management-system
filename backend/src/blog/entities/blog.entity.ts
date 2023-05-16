@@ -6,7 +6,7 @@ import * as mongoose from 'mongoose';
 import { User } from 'src/user/entities/user.entity';
 
 export interface Blog extends Document {
-  tag: string[];
+  tags: string[];
   title: string;
   category: Category;
   user: User;
@@ -21,7 +21,7 @@ export interface Blog extends Document {
 @Schema()
 export class Blog {
   @Prop({ type: [String], required: true })
-  tag: string[];
+  tags: string[];
 
   @Prop({ required: true })
   title: string;

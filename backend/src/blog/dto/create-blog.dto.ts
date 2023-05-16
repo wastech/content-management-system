@@ -1,5 +1,5 @@
 export class CreateBlogDto {
-  readonly tag: string[];
+  readonly tags: string[];
   readonly title: string;
   readonly author: string;
   slug: string;
