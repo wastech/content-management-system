@@ -8,14 +8,15 @@ import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from './auth.guard';
 import { RolesGuard } from './roles.guard';
 import { Auth, AuthSchema } from './entities/auth.entity';
-
+import * as dotenv from 'dotenv';
+dotenv.config();
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: Auth.name, schema: AuthSchema }]),
     JwtModule.register({
       global: true,
-      secret: jwtConstants.secret,
-      signOptions: { expiresIn: '1d' },
+      secret: process.env.SECRET,
+      signOptions: { expiresIn: process.env.JWT_EXPIRING_DATE },
     }),
   ],
   controllers: [AuthController],
