@@ -86,6 +86,14 @@ The API will be available at http://localhost:3000. You can test the API endpoin
  - Be respectful of others and their contributions. We have a code of conduct in place to ensure a welcoming environment for everyone.
  
  If you have any questions or need help getting started, please don't hesitate to reach out to me. I'm happy to help!
- 
+ ## Related Repositories
+
+Here are some more example projects with Nest.js
+
+
+[![API example](https://github-readme-stats.vercel.app/api/pin/?username=wastech&repo=nestjs-authentication)](https://github.com/wastech/nestjs-authentication)
+[![API example](https://github-readme-stats.vercel.app/api/pin/?username=wastech&repo=nestjs-blog-Api)](https://github.com/wastech/nestjs-blog-Api)
+
+
 ### Contact
 If you have any questions or suggestions regarding this API, please feel free to contact me at [fataiwasiu2@gmail.com]. Thank you for using our service!
