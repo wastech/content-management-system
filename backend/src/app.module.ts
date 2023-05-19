@@ -12,7 +12,7 @@ import { UserModule } from './user/user.module';
 import { BlogModule } from './blog/blog.module';
 import { CategoryModule } from './category/category.module';
 import { CommentModule } from './comment/comment.module';
-config(); // Load environment variables from .env file
+config();
 
 @Module({
   imports: [
