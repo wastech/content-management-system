@@ -17,11 +17,10 @@ import {
 import { CategoryService } from './category.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
-
-import { RolesGuard } from 'src/auth/roles.guard';
-import { Role } from 'src/auth/entities/auth.entity';
-import { Public } from 'src/auth/decorators/public.decorator';
-import { Roles } from 'src/auth/decorators/roles.decorator';
+import { RolesGuard } from '../auth/roles.guard';
+import { Role } from '../auth/entities/auth.entity';
+import { Public } from '../auth/decorators/public.decorator';
+import { Roles } from '../auth/decorators/roles.decorator';
 import { Category } from './entities/category.entity';
 
 @Controller('category')

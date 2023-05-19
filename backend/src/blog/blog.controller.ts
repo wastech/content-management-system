@@ -21,11 +21,11 @@ import { BlogService } from './blog.service';
 import { CreateBlogDto } from './dto/create-blog.dto';
 import { UpdateBlogDto } from './dto/update-blog.dto';
 import { Blog } from './entities/blog.entity';
-import { RolesGuard } from 'src/auth/roles.guard';
-import { Role } from 'src/auth/entities/auth.entity';
-import { Public } from 'src/auth/decorators/public.decorator';
-import { Roles } from 'src/auth/decorators/roles.decorator';
-import { CommentService } from 'src/comment/comment.service';
+import { RolesGuard } from '../auth/roles.guard';
+import { Role } from '../auth/entities/auth.entity';
+import { Public } from '../auth/decorators/public.decorator';
+import { Roles } from '../auth/decorators/roles.decorator';
+import { CommentService } from '../comment/comment.service';
 import { MongoError } from 'mongodb';
 import { FileInterceptor, AnyFilesInterceptor } from '@nestjs/platform-express';
 

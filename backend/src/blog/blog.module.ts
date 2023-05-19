@@ -6,11 +6,8 @@ import { MulterModule } from '@nestjs/platform-express';
 import { MongooseModule } from '@nestjs/mongoose';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
-import { CommentModule } from 'src/comment/comment.module';
-import {
-  Category,
-  CategorySchema,
-} from 'src/category/entities/category.entity';
+import { CommentModule } from '../comment/comment.module';
+import { Category, CategorySchema } from '../category/entities/category.entity';
 
 @Module({
   imports: [

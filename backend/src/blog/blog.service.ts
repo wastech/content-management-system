@@ -4,12 +4,12 @@ import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { UpdateBlogDto } from './dto/update-blog.dto';
 import { Blog } from './entities/blog.entity';
-import { JwtPayload } from 'src/auth/interfaces/jwt-payload.interface';
+import { JwtPayload } from '../auth/interfaces/jwt-payload.interface';
 import slugify from 'slugify';
 import {
   Category,
   CategoryDocument,
-} from 'src/category/entities/category.entity';
+} from '../category/entities/category.entity';
 
 @Injectable()
 export class BlogService {

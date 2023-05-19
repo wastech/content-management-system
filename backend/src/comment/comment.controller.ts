@@ -12,11 +12,11 @@ import {
 } from '@nestjs/common';
 import { CommentService } from './comment.service';
 import { Comment } from './entities/comment.entity';
-import { RolesGuard } from 'src/auth/roles.guard';
-import { Role } from 'src/auth/entities/auth.entity';
-import { Public } from 'src/auth/decorators/public.decorator';
-import { Roles } from 'src/auth/decorators/roles.decorator';
-import { BlogService } from 'src/blog/blog.service';
+import { RolesGuard } from '../auth/roles.guard';
+import { Role } from '../auth/entities/auth.entity';
+import { Public } from '../auth/decorators/public.decorator';
+import { Roles } from '../auth/decorators/roles.decorator';
+import { BlogService } from '../blog/blog.service';
 
 @Controller('comment')
 export class CommentController {
