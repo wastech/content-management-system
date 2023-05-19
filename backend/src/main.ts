@@ -10,7 +10,6 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(bodyParser.json());
-  // app.use(csurf());
   app.use(helmet());
   app.enableCors();
   await app.listen(process.env.PORT || 5000);
