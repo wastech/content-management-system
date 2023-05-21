@@ -22,6 +22,9 @@ jobs:
         with:
           node-version: 14
 
+      - name: Change directory to backend
+        run: cd backend
+
       - name: Install dependencies
         run: npm ci
 
@@ -32,7 +35,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: dist
-          path: ./backend/dist
+          path: ./dist
 
       - name: Deploy to Azure Static Web Apps
         id: builddeploy
@@ -43,7 +46,7 @@ jobs:
           action: "upload"
           ###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
           # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
-          app_location: "./backend/dist" # App source code path
+          app_location: "./dist" # App source code path
           ###### End of Repository/Build Configurations ######
 
   close_pull_request_job:
