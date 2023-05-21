@@ -32,7 +32,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: node-app
-          path: .
+          path: ./backend/dist/main.js
 
   deploy:
     runs-on: ubuntu-latest
@@ -54,4 +54,4 @@ jobs:
           app-name: 'nest-CMS-API'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_8BB477438D7E40E1B31DD55D31E5752A }}
-          package: .
+          package: ./backend/dist/main.js
