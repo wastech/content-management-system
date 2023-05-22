@@ -11,30 +11,32 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2
 
-      - name: Set up Node.js version
-        uses: actions/setup-node@v1
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
         with:
-          node-version: '14.x'
+          node-version: '14'
 
       - name: Change directory to backend
         run: cd backend
 
-      - name: npm install, build, and test
+      - name: npm install
+        run: npm install
+
+      - name: Build and test
         run: |
-          npm install
-          npm run build --if-present
-          npm run test --if-present
-      
+          npm run build
+          npm run test
+
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
           name: node-app
-          path: .
+          path: backend
 
   deploy:
     runs-on: ubuntu-latest
@@ -59,4 +61,4 @@ jobs:
           app-name: 'nest-cms-api'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_C7BDBB2A374E4919B449F708D787F6EB }}
-          package: .
+          package: backend
