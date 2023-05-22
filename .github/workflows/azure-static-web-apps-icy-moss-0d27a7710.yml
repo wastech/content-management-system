@@ -61,4 +61,4 @@ jobs:
           app-name: 'nest-cms-api'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_C7BDBB2A374E4919B449F708D787F6EB }}
-          package: backend
+          package: .
