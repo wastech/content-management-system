@@ -26,10 +26,10 @@ jobs:
         run: cd backend
 
       - name: Install dependencies
-        run: cd .. && cd backend && npm ci
+        run:  cd backend && npm ci
 
       - name: Build
-        run: cd .. && cd backend && npm run build
+        run:  cd backend && npm run build
       
       - name: Archive production build
         uses: actions/upload-artifact@v2
