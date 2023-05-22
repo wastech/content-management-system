@@ -1,7 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import * as bodyParser from 'body-parser';
-import * as csurf from 'csurf';
 import helmet from 'helmet';
 import * as dotenv from 'dotenv';
 
