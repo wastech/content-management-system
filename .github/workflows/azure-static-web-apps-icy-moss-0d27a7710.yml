@@ -25,12 +25,12 @@ jobs:
         run: cd backend
 
       - name: npm install
-        run: cd backend && npm install
+        run: npm install
 
       - name: Build and test
         run: |
-          cd backend && npm run build
-          cd backend && npm run test
+          npm run build
+          npm run test
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
