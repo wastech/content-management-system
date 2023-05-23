@@ -9,7 +9,7 @@
     "node": ">=14.0.0"
    },
   "scripts": {
-    "build": "node build",
+    "build": "node dist/main.js",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "node dist/main.js",
     "start:dev": "nest start --watch",
