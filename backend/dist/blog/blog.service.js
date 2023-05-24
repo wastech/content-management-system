@@ -94,15 +94,15 @@ let BlogService = class BlogService {
     }
     async getAllTags() {
         const tags = await this.blogModel.aggregate([
-            { $unwind: '$tag' },
-            { $group: { _id: '$tag', count: { $sum: 1 } } },
+            { $unwind: '$tags' },
+            { $group: { _id: '$tags', count: { $sum: 1 } } },
             { $project: { _id: 0, name: '$_id', count: 1 } },
             { $sort: { count: -1 } },
         ]);
         return tags;
     }
     async getPostsByTag(tag) {
-        const posts = await this.blogModel.find({ tag: tag }).exec();
+        const posts = await this.blogModel.find({ tags: tag }).exec();
         return posts;
     }
     async updatePost(id, updatePostDto) {

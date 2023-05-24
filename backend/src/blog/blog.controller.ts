@@ -211,7 +211,6 @@ export class BlogController {
   @Get('tag/:tag')
   async getPostsByTag(@Param('tag') tag: string) {
     const posts = await this.blogService.getPostsByTag(tag);
-    console.log('object', tag);
     return { posts };
   }
 

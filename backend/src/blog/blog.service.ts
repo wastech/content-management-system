@@ -109,8 +109,8 @@ export class BlogService {
 
   async getAllTags(): Promise<{ name: string; count: number }[]> {
     const tags = await this.blogModel.aggregate([
-      { $unwind: '$tag' },
-      { $group: { _id: '$tag', count: { $sum: 1 } } },
+      { $unwind: '$tags' },
+      { $group: { _id: '$tags', count: { $sum: 1 } } },
       { $project: { _id: 0, name: '$_id', count: 1 } },
       { $sort: { count: -1 } },
     ]);
@@ -118,7 +118,7 @@ export class BlogService {
   }
 
   async getPostsByTag(tag: string): Promise<Blog[]> {
-    const posts = await this.blogModel.find({ tag: tag }).exec();
+    const posts = await this.blogModel.find({ tags: tag }).exec();
     return posts;
   }
 

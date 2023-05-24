@@ -86,7 +86,6 @@ let BlogController = class BlogController {
     }
     async getPostsByTag(tag) {
         const posts = await this.blogService.getPostsByTag(tag);
-        console.log('object', tag);
         return { posts };
     }
     async updatePost(id, updatePostDto, req) {
