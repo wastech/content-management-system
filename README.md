@@ -9,7 +9,6 @@ A content management system (CMS) is a software application that allows users to
 ## Getting Started
  To get started with this API, you'll need to have Node.js installed on your machine. Once you've done that, you can follow these steps to set up the API:
  - Clone the repository to your local machine.
-
 ```bash
 git@github.com:wastech/content-management-system.git
 ```
